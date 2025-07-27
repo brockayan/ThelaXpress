@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edit Profile • ThelaXpress</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --vendor-main: #7fc483;
+      --vendor-accent: #4B944E;
+      --vendor-gradient: linear-gradient(120deg, #85e6c5 0%, #f6d365 100%);
+      --vendor-sidebar-gradient: linear-gradient(140deg, #4B944E 0%, #61c48f 55%, #ffe986 110%);
+      --glass-bg: rgba(255,255,255,0.7);
+      --glass-border: rgba(255,255,255,0.23);
+      --radius: 22px;
+    }
+    .sidebar-profile {
+      min-width: 220px;
+      max-width: 250px;
+      background: var(--vendor-sidebar-gradient);
+      backdrop-filter: blur(15px);
+      border-right: 2px solid var(--glass-border);
+      padding: 36px 24px 24px;
+      border-radius: var(--radius) 0 0 var(--radius);
+      box-shadow: 0 8px 36px 0 rgba(75,148,78,0.14), 0 7px 22px rgba(255,233,134,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      z-index: 2;
+      position: relative;
+    }
+    .sidebar-profile h2 {
+      font-weight: 800;
+      font-size: 1.45rem;
+      margin-bottom: 36px;
+      letter-spacing: 1px;
+      color: #fff;
+      text-shadow: 0 4px 16px #56bb5855;
+    }
+    .sidebar-profile nav a {
+      display: block;
+      width: 100%;
+      padding: 10px 18px;
+      margin-bottom: 14px;
+      border-radius: 13px;
+      color: #fff;
+      font-weight: 500;
+      font-size: 1.06rem;
+      background: rgba(255,255,255,0.10);
+      text-decoration: none;
+      transition: background 0.22s, transform 0.15s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 14px 0 rgba(106,180,247,0.06);
+    }
+    .sidebar-profile nav a:hover,
+    .sidebar-profile nav a:focus,
+    .sidebar-profile nav a.active {
+      background: #fff59f;
+      color: #2e5132;
+      transform: scale(1.04) translateX(5px);
+      font-weight: 600;
+    }
+    @media (max-width:900px) {
+      .sidebar-profile {
+        min-width:160px;
+        max-width:200px;
+        padding: 20px 10px 12px;
+      }
+    }
+    @media (max-width:580px) {
+      body { flex-direction: column;}
+      .sidebar-profile {
+        width: 100%;
+        border-radius: var(--radius) var(--radius) 0 0;
+        border-right: none;
+        border-bottom: 2px solid var(--glass-border);
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding: 10px 2vw 10px 2vw;
+      }
+      .sidebar-profile h2 { display: none;}
+    }
+    .profile-main-content {
+      flex: 1;
+      padding: 2.5rem;
+      background: rgba(255,255,255,0.6);
+      box-shadow: 0 4px 30px -4px #7fc4831c;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      min-width: 0;
+      backdrop-filter: blur(12px);
+    }
+    @media (max-width:900px) {
+      .profile-main-content { padding: 1rem;}
+    }
+    @media (max-width:580px) {
+      .profile-main-content { border-radius: 0 0 var(--radius) var(--radius);}
+    }
+    /* Float avatar animation */
+    @keyframes float { 0%,100%{transform: translateY(0)}50%{transform: translateY(-5px)} }
+    .float { animation: float 3s ease-in-out infinite; }
+  </style>
+</head>
+<body class="bg-green-50 text-green-900 font-sans min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="sidebar-profile">
+    <h2>My Profile</h2>
+    <nav>
+      <a href="./vendor-dashboard.html">Dashboard</a>
+      <a href="./vendor-myprofile.html">Profile</a>
+      <a href="./landing-page.html">Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="profile-main-content">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between mb-8">
+      <h1 class="text-3xl font-extrabold">Edit Profile</h1>
+      <button id="cancel-btn" class="bg-gray-200 hover:bg-gray-300 text-green-800 px-4 py-2 rounded-lg shadow transition">
+        <a href="./vendor-myprofile.html">Cancel</a>
+      </button>
+    </header>
+
+    <!-- Edit Form -->
+    <form id="edit-profile-form" class="max-w-3xl mx-auto space-y-8 bg-white p-8 rounded-2xl shadow-md">
+      <!-- Avatar -->
+      <div class="flex items-center gap-6">
+        <div class="relative">
+          <img id="avatar-preview" src="https://via.placeholder.com/120" alt="User avatar"
+               class="w-32 h-32 rounded-full object-cover shadow-lg float" />
+          <label for="avatar" class="absolute bottom-0 right-0 bg-green-600 hover:bg-green-700 text-white p-2 rounded-full shadow-md cursor-pointer transition">
+            ✎
+          </label>
+          <input type="file" id="avatar" name="avatar" accept="image/*" class="hidden" />
+        </div>
+        <div>
+          <h2 class="text-2xl font-semibold">VendorName</h2>
+          <p class="text-green-800/80">Joined: March 12, 2024</p>
+        </div>
+      </div>
+
+      <!-- Fields -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Full Name -->
+        <div>
+          <label for="fullName" class="font-medium block mb-1">Full Name</label>
+          <input type="text" id="fullName" name="fullName" required
+                 class="w-full border border-green-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+                 value="VendorName" />
+        </div>
+        <!-- Email -->
+        <div>
+          <label for="email" class="font-medium block mb-1">Email</label>
+          <input type="email" id="email" name="email" required
+                 class="w-full border border-green-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+                 value="vendor@example.com" />
+        </div>
+        <!-- Phone -->
+        <div>
+          <label for="phone" class="font-medium block mb-1">Phone</label>
+          <input type="tel" id="phone" name="phone" required
+                 class="w-full border border-green-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+                 value="+91 98765 43210" />
+        </div>
+        <!-- Business Name -->
+        <div>
+          <label for="business" class="font-medium block mb-1">Business Name</label>
+          <input type="text" id="business" name="business" required
+                 class="w-full border border-green-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+                 value="Thela Delights" />
+        </div>
+        <!-- Location -->
+        <div>
+          <label for="location" class="font-medium block mb-1">Location</label>
+          <input type="text" id="location" name="location" required
+                 class="w-full border border-green-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+                 value="Mumbai, India" />
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="text-right">
+        <button type="submit"
+                class="bg-green-700 hover:bg-green-800 text-white px-6 py-2 rounded-lg shadow transition">
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    // Avatar preview
+    document.getElementById('avatar').addEventListener('change', function(e) {
+      const [file] = e.target.files;
+      if (file) {
+        document.getElementById('avatar-preview').src = URL.createObjectURL(file);
+      }
+    });
+
+    // Cancel button executes link navigation
+    document.getElementById('cancel-btn').addEventListener('click', function(e) {
+      // Allow <a> link default navigation
+    });
+
+    // Form submission
+    document.getElementById('edit-profile-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = new FormData(this);
+      // TODO: send `form` to your API endpoint via fetch/AJAX
+      alert('Profile updated successfully.');
+    });
+  </script>
+</body>
+</html>
+

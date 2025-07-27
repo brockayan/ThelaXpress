@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ThelaXpress - Smart Sourcing for Street Food Heroes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .icon-circle {
+      @apply bg-green-200 rounded-full flex justify-center items-center w-14 h-14;
+    }
+    .icon-line {
+      height: 2px;
+      width: 4rem;
+      background-color: #bbf7d0;
+    }
+    button:focus-visible {
+      outline-offset: 4px;
+      outline: 3px solid #166534;
+      outline: auto;
+    }
+    /* Simple fade-in animation for sections */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s forwards;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body class="bg-green-50 min-h-screen font-sans text-green-900">
+    
+
+  <!-- NAVIGATION -->
+   
+  <header class="bg-green-100 shadow-md fixed w-full top-0 left-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="text-2xl font-extrabold tracking-tight text-green-900">ThelaXpress</a>
+      <nav class="hidden md:flex gap-10 font-semibold text-green-800">
+        <a href="#how-it-works" class="hover:text-green-900 transition">How It Works</a>
+        <a href="#why-us" class="hover:text-green-900 transition">Why Us?</a>
+        <a href="#testimonials" class="hover:text-green-900 transition">Testimonials</a>
+        <a href="#faq" class="hover:text-green-900 transition">FAQ</a>
+      </nav>
+      <div class="hidden md:flex gap-4">
+        <button class="bg-green-800 hover:bg-green-900 text-white font-semibold px-5 py-2 rounded-lg shadow transition focus:outline-none focus:ring-4 focus:ring-green-600">Sign Up</button>
+        <button class="bg-green-100 hover:bg-green-200 text-green-900 font-semibold px-5 py-2 rounded-lg shadow transition focus:outline-none focus:ring-4 focus:ring-green-300">Sign In</button>
+      </div>
+      <!-- Mobile menu button -->
+      <button id="mobile-menu-btn" class="md:hidden text-green-900 focus:outline-none" aria-label="Toggle menu">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <nav id="mobile-menu" class="hidden md:hidden bg-green-100 px-6 pb-4">
+      <a href="#how-it-works" class="block py-2 font-semibold text-green-800 hover:text-green-900">How It Works</a>
+      <a href="#why-us" class="block py-2 font-semibold text-green-800 hover:text-green-900">Why Us?</a>
+      <a href="#testimonials" class="block py-2 font-semibold text-green-800 hover:text-green-900">Testimonials</a>
+      <a href="#faq" class="block py-2 font-semibold text-green-800 hover:text-green-900">FAQ</a>
+      <div class="pt-4 flex gap-4">
+        <button class="flex-1 bg-green-800 hover:bg-green-900 text-white font-semibold px-3 py-2 rounded-lg shadow transition focus:outline-none focus:ring-4 focus:ring-green-600">Get Started</button>
+        <button class="flex-1 bg-green-100 hover:bg-green-200 text-green-900 font-semibold px-3 py-2 rounded-lg shadow transition focus:outline-none focus:ring-4 focus:ring-green-300">Become Supplier</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- SPACER for fixed header -->
+  <div class="h-20"></div>
+
+  <!-- HERO Section -->
+  <section class="flex flex-col md:flex-row-reverse items-center w-full max-w-7xl gap-10 md:gap-20 px-6 md:px-0 pb-20 border-b border-green-200 fade-in">
+    <img 
+      src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/829fd673-be6e-4edc-a2dc-fd1b22da7f35.png" 
+      alt="Street food vendor behind a tray of snacks, smiling"
+      class="rounded-3xl shadow-lg max-w-xs w-full object-cover"
+      onerror="this.style.display='none'"
+      loading="lazy"
+    />
+    <div class="flex flex-col max-w-xl text-center md:text-left">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">ThelaXpress</h1>
+      <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-green-800">
+        Smart Sourcing <br class="hidden md:block" /> for Street Food Heroes
+      </h2>
+      <p class="text-green-900/90 text-lg mb-8 max-w-md mx-auto md:mx-0">
+        Fresh raw materials at the best prices — fast, fair, and reliable.
+      </p>
+      <div class="flex justify-center md:justify-start gap-4">
+        <button class="bg-green-800 hover:bg-green-900 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition focus:outline-none focus:ring-4 focus:ring-green-600">
+          Get Started
+        </button>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+<!-- How It Works Section -->
+<section id="how-it-works" class="w-full max-w-5xl mx-auto px-6 py-20 text-center fade-in">
+  <h3 class="text-3xl font-bold mb-14 text-green-900">How It Works</h3>
+  <div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12">
+    <div class="flex flex-col items-center gap-4 max-w-xs">
+      <div class="icon-circle" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-3-3v6m-6 6h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      </div>
+      <div>
+        <p><strong>1. Vendors</strong></p>
+        <p class="text-green-900/80">Submit <strong>Requirements</strong></p>
+      </div>
+    </div>
+    <div class="hidden md:block icon-line" aria-hidden="true"></div>
+    <div class="flex flex-col items-center gap-4 max-w-xs">
+      <div class="icon-circle" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8 7v10M16 7v10M12 7a4 4 0 014 4v3H8v-3a4 4 0 014-4z" />
+        </svg>
+      </div>
+      <div>
+        <p><strong>2. Suppliers</strong></p>
+        <p class="text-green-900/80">Bid with Bestre</p>
+      </div>
+    </div>
+    <div class="hidden md:block icon-line" aria-hidden="true"></div>
+    <div class="flex flex-col items-center gap-4 max-w-xs">
+      <div class="icon-circle" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <div>
+        <p><strong>3. Vendors</strong></p>
+        <p class="text-green-900/80">Receive &amp; Pay</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Why Us Section -->
+  <section id="why-us" class="max-w-6xl mx-auto py-16 px-6 fade-in">
+    <h3 class="text-3xl font-bold mb-10 text-center text-green-900">Why Us?</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+      <div class="p-6 bg-green-100 rounded-2xl shadow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-6 h-14 w-14 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11 11V7a1 1 0 012 0v4m-1 5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12v1a2 2 0 01-2 2H5a2 2 0 01-2-2v-1" />
+        </svg>
+        <h4 class="text-xl font-semibold mb-2">Reliable Quality</h4>
+        <p>Only trusted vendors and suppliers make it to our network.</p>
+      </div>
+      <div class="p-6 bg-green-100 rounded-2xl shadow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-6 h-14 w-14 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h3m0 0v1a4 4 0 004 4h1m-5-5a4 4 0 014 4v1m0-5V5a1 1 0 011-1h2a1 1 0 011 1v7m-5 7h7" />
+        </svg>
+        <h4 class="text-xl font-semibold mb-2">Fast Delivery</h4>
+        <p>Timely delivery keeps your business running smoothly.</p>
+      </div>
+      <div class="p-6 bg-green-100 rounded-2xl shadow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-6 h-14 w-14 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <h4 class="text-xl font-semibold mb-2">Best Prices</h4>
+        <p>Competitive bids ensure you get the best market price.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="bg-green-100 py-20 fade-in">
+    <h3 class="text-3xl font-bold text-center mb-12 text-green-900">What People Say</h3>
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 px-6">
+      <blockquote class="bg-white p-6 rounded-lg shadow-lg">
+        <p class="text-green-900 italic mb-4">"ThelaXpress made sourcing my ingredients so much easier. I save time and money every week."</p>
+        <footer class="text-green-700 font-semibold">– Ramesh, Street Food Vendor</footer>
+      </blockquote>
+      <blockquote class="bg-white p-6 rounded-lg shadow-lg">
+        <p class="text-green-900 italic mb-4">"As a supplier, I love how the platform connects me directly to vendors and keeps payments transparent."</p>
+        <footer class="text-green-700 font-semibold">– Kavita, Supplier</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="max-w-5xl mx-auto py-20 px-6 fade-in">
+    <h3 class="text-3xl font-bold text-center mb-14 text-green-900">Frequently Asked Questions</h3>
+    <dl class="space-y-8 text-green-900">
+      <div>
+        <dt class="font-semibold text-lg">How do vendors submit their requirements?</dt>
+        <dd class="mt-2 text-green-900/90">Vendors fill out a simple form detailing the materials they need, quantities, and preferred delivery times.</dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-lg">What guarantees do suppliers provide?</dt>
+        <dd class="mt-2 text-green-900/90">Suppliers in our network are verified and committed to quality and timely delivery.</dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-lg">How is payment handled?</dt>
+        <dd class="mt-2 text-green-900/90">Payments are securely processed through our platform after delivery confirmation.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-green-100 text-green-900 py-12 px-6 mt-20">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <a href="#" class="text-2xl font-extrabold tracking-tight">ThelaXpress</a>
+      <p class="text-green-900/80 text-sm">&copy; 2025 ThelaXpress. All rights reserved.</p>
+      <nav class="flex gap-6">
+        <a href="#" aria-label="Twitter" class="hover:text-green-800 transition">
+          <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="Facebook" class="hover:text-green-800 transition">
+          <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M22 12a10 10 0 10-11.5 9.95v-7.04H8v-2.91h2.5V9.8c0-2.47 1.46-3.84 3.7-3.84 1.07 0 2.2.19 2.2.19v2.42H15c-1.24 0-1.62.77-1.62 1.56v1.88h2.77l-.44 2.91h-2.33v7.04A10 10 0 0022 12z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="Instagram" class="hover:text-green-800 transition">
+          <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 2A3.75 3.75 0 004 7.75v8.5A3.75 3.75 0 007.75 20h8.5a3.75 3.75 0 003.75-3.75v-8.5A3.75 3.75 0 0016.25 4h-8.5zm8.75 2a1 1 0 110 2 1 1 0 010-2zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/>
+          </svg>
+        </a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+      // Accessibility toggle for aria-expanded
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !expanded);
+    });
+  </script>
+
+</body>
+</html>

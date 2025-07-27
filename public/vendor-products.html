@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Browse Materials • ThelaXpress</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .glass { background: rgba(255,255,255,0.72); backdrop-filter: blur(12px); }
+    .supplier-card { transition: box-shadow 0.2s, transform 0.18s; }
+    .supplier-card:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 6px 24px #4b944e15, 0 2px 8px #0002;
+      background-color: #f6fef8;
+    }
+    .material-badge {
+      background: #e0ffe6; color: #239059;
+      font-weight: bold; font-size: 0.95rem;
+      border-radius: 0.6rem; padding: 0.18rem 0.95rem;
+      display: inline-block;
+      margin-bottom: 0.4rem;
+    }
+  </style>
+</head>
+<body class="bg-green-50 font-sans text-green-900 min-h-screen">
+
+  <!-- NAVBAR -->
+  <header class="bg-gradient-to-br from-green-600 via-green-400 to-green-200 text-white px-6 py-5 shadow-lg">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="#" class="text-2xl font-extrabold tracking-tight">ThelaXpress</a>
+      <nav class="hidden md:flex gap-8 font-medium">
+        <a href="./vendor-dashboard.html" class="hover:underline">Dashboard</a>
+        <a href="./vendor-order.html" class="hover:underline">Orders</a>
+        <a href="./vendor-products.html" class="hover:underline">Products</a>
+        <a href="./vendor-myprofile.html" class="hover:underline">Profile</a>
+      </nav>
+      <a href="./landing-page.html" class="hidden md:block bg-green-800 px-4 py-2 rounded-lg shadow hover:bg-green-900 text-white">Logout</a>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-10">
+    <h1 class="text-3xl font-extrabold mb-7 text-green-700">Available Materials from Suppliers</h1>
+    <!-- Search and Filter -->
+    <div class="flex flex-col md:flex-row gap-6 md:gap-4 mb-9">
+      <input type="text" placeholder="Search for material…" class="w-full max-w-sm border border-green-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-400" />
+      <select class="max-w-xs border border-green-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-400">
+        <option value="">All Categories</option>
+        <option>Vegetables</option>
+        <option>Grains</option>
+        <option>Spices</option>
+        <option>Dairy</option>
+        <option>Fruits</option>
+      </select>
+      <select class="max-w-xs border border-green-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-400">
+        <option value="">Sort by: Default</option>
+        <option>Lowest Price</option>
+        <option>Highest Rated</option>
+      </select>
+    </div>
+
+    <!-- Supplier/Material Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Supplier 1 -->
+      <div class="supplier-card glass rounded-xl shadow p-6 flex flex-col gap-3">
+        <div class="flex items-center gap-3">
+          <img src="https://randomuser.me/api/portraits/men/51.jpg" alt="Supplier" class="w-12 h-12 rounded-full object-cover border-2 border-green-200" />
+          <div>
+            <div class="font-semibold text-lg">Kavita Traders</div>
+            <div class="text-green-700 text-sm">4.7 ★</div>
+          </div>
+        </div>
+        <div class="mt-2 grid gap-1">
+          <span class="material-badge">Tomatoes</span>
+          <div class="text-green-900">₹43/kg <span class="text-xs text-green-700">(Min: 10kg)</span></div>
+          <span class="material-badge">Onions</span>
+          <div class="text-green-900">₹29/kg <span class="text-xs text-green-700">(Min: 15kg)</span></div>
+        </div>
+        <div class="flex items-end justify-between mt-3">
+          <div class="text-green-700 text-xs">Ahmedabad</div>
+          <button class="bg-green-600 text-white font-semibold px-5 py-2 rounded-lg shadow hover:bg-green-700">
+              <a href="./vendor-products-supplies.html">View Supplier</a>
+          </button>
+        </div>
+      </div>
+      <!-- Supplier 2 -->
+      <div class="supplier-card glass rounded-xl shadow p-6 flex flex-col gap-3">
+        <div class="flex items-center gap-3">
+          <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="Supplier" class="w-12 h-12 rounded-full object-cover border-2 border-green-200" />
+          <div>
+            <div class="font-semibold text-lg">Bhavani Produce</div>
+            <div class="text-green-700 text-sm">4.9 ★</div>
+          </div>
+        </div>
+        <div class="mt-2 grid gap-1">
+          <span class="material-badge">Basmati Rice</span>
+          <div class="text-green-900">₹73/kg <span class="text-xs text-green-700">(Min: 20kg)</span></div>
+          <span class="material-badge">Wheat Flour</span>
+          <div class="text-green-900">₹48/kg <span class="text-xs text-green-700">(Min: 40kg)</span></div>
+        </div>
+        <div class="flex items-end justify-between mt-3">
+          <div class="text-green-700 text-xs">Surat</div>
+          <button class="bg-green-600 text-white font-semibold px-5 py-2 rounded-lg shadow hover:bg-green-700">View Supplier</button>
+        </div>
+      </div>
+      <!-- Supplier 3 -->
+      <div class="supplier-card glass rounded-xl shadow p-6 flex flex-col gap-3">
+        <div class="flex items-center gap-3">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Supplier" class="w-12 h-12 rounded-full object-cover border-2 border-green-200" />
+          <div>
+            <div class="font-semibold text-lg">MangoLand Foods</div>
+            <div class="text-green-700 text-sm">4.8 ★</div>
+          </div>
+        </div>
+        <div class="mt-2 grid gap-1">
+          <span class="material-badge">Mangoes</span>
+          <div class="text-green-900">₹68/kg <span class="text-xs text-green-700">(Min: 10kg)</span></div>
+          <span class="material-badge">Banana</span>
+          <div class="text-green-900">₹38/kg <span class="text-xs text-green-700">(Min: 25kg)</span></div>
+        </div>
+        <div class="flex items-end justify-between mt-3">
+          <div class="text-green-700 text-xs">Nashik</div>
+          <button class="bg-green-600 text-white font-semibold px-5 py-2 rounded-lg shadow hover:bg-green-700">View Supplier</button>
+        </div>
+      </div>
+      <!-- Add more supplier material cards as needed -->
+    </div>
+  </main>
+</body>
+</html>

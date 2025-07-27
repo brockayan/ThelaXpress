@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vibrant & Delicate Dashboard</title>
+  <style>
+    :root {
+      --vendor-main: #7fc483;
+      --vendor-accent: #4B944E;
+      --vendor-gradient: linear-gradient(120deg, #85e6c5 0%, #f6d365 100%);
+      --vendor-sidebar-gradient: linear-gradient(140deg, #4B944E 0%, #61c48f 55%, #ffe986 110%);
+      --vendor-card: rgba(127,196,131,0.10);
+      --glass-bg: rgba(255,255,255,0.7);
+      --badge-blue: #6fb4f7;
+      --badge-pink: #fa91bd;
+      --badge-orange: #ffc96c;
+      --glass-border: rgba(255,255,255,0.23);
+      --radius: 22px;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      background: var(--vendor-gradient);
+      align-items: stretch;
+      transition: background 0.6s;
+      overflow-x: hidden;
+    }
+    .bg-accent, .bg-accent2 {
+      pointer-events: none;
+      position: fixed;
+      z-index: 0;
+      border-radius: 50%;
+    }
+    .bg-accent {
+      top: -160px; left: -150px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle at 40% 50%, #f6d36555 0%, #fdc79e22 95%);
+    }
+    .bg-accent2 {
+      bottom: -180px; right: -100px;
+      width: 390px; height: 390px;
+      background: radial-gradient(circle at 65% 50%, #7fc48344 0%, #bbf6e022 98%);
+      filter: blur(2px);
+    }
+    .sidebar {
+      min-width: 220px;
+      max-width: 250px;
+      background: var(--vendor-sidebar-gradient);
+      backdrop-filter: blur(15px);
+      border-right: 2px solid var(--glass-border);
+      padding: 36px 24px 24px;
+      border-radius: var(--radius) 0 0 var(--radius);
+      box-shadow: 0 8px 36px 0 rgba(75,148,78,0.14), 0 7px 22px rgba(255,233,134,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      z-index: 2;
+      position: relative;
+    }
+    .sidebar h2 {
+      font-weight: 800;
+      font-size: 1.45rem;
+      margin-bottom: 36px;
+      letter-spacing: 1px;
+      color: #fff;
+      text-shadow: 0 4px 16px #56bb5855;
+    }
+    .sidebar nav a {
+      display: block;
+      width: 100%;
+      padding: 10px 18px;
+      margin-bottom: 14px;
+      border-radius: 13px;
+      color: #fff;
+      font-weight: 500;
+      font-size: 1.06rem;
+      background: rgba(255,255,255,0.10);
+      text-decoration: none;
+      transition: background 0.22s, transform 0.15s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 14px 0 rgba(106,180,247,0.06);
+    }
+    .sidebar nav a:hover, .sidebar nav a:focus {
+      background: #fff59f;
+      color: #2e5132;
+      transform: scale(1.04) translateX(5px);
+      font-weight: 600;
+    }
+    .main-content {
+      flex: 1 1 0%;
+      background: var(--glass-bg);
+      padding: 36px 44px 26px 44px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      box-shadow: 0 5px 29px 0 rgba(127,196,131,0.09);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      z-index: 1;
+      position: relative;
+    }
+    .dashboard-hero {
+      width: 100%;
+      background: linear-gradient(87deg,#eafff2 60%,#fcf8e6 100%);
+      border-radius: 16px;
+      margin-bottom: 22px;
+      box-shadow: 0 2px 10px #7fc48316;
+      padding: 32px 24px 30px 38px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      min-height: 55px;
+      position: relative;
+    }
+    .dashboard-hero svg {
+      min-width: 65px;
+      width: 65px;
+      height: 65px;
+      margin-right: 8px;
+    }
+    .dashboard-hero-content {
+      flex: 1;
+    }
+    .dashboard-hero h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #388f4c;
+      margin: 0 0 8px 0;
+    }
+    .dashboard-hero p {
+      color: #3b6145;
+      margin: 0;
+      font-size: 1.03rem;
+      opacity: 0.88;
+      font-weight: 500;
+    }
+    .decorative-wave {
+      width: 100%;
+      height: 38px;
+      margin: -15px 0 35px;
+      display: block;
+    }
+    .dashboard-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      z-index: 1;
+      position: relative;
+    }
+    .card {
+      border-radius: 16px;
+      background: var(--vendor-card);
+      backdrop-filter: blur(2px);
+      padding: 30px 12px 26px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.12rem;
+      color: #326539;
+      border: 2.5px solid;
+      border-image: linear-gradient(120deg, #7fc483 40%, #6fb4f7 97%) 1;
+      overflow: visible;
+      animation: floatIn 0.8s;
+      box-shadow: 0 8px 24px 0 #fa91bd11;
+      position: relative;
+      min-height: 130px;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s ease;
+      cursor: pointer;
+    }
+    .card:active {
+      transform: translateY(-2px) scale(1.01);
+      background: #f4faee;
+    }
+    .card .badge {
+      position: absolute;
+      top: 16px; right: 18px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--badge-blue);
+      padding: 2px 14px 3px 9px;
+      border-radius: 13px;
+      box-shadow: 0 1px 10px #6fb4f766;
+      z-index: 4;
+      opacity: 0.93;
+      letter-spacing: 0.3px;
+      animation: badge-pop 0.4s;
+    }
+    .card:nth-child(2) .badge { background: var(--badge-pink); }
+    .card:nth-child(3) .badge { background: var(--badge-orange); color: #735c13; }
+    .card span.card-number {
+      font-size: 2.15rem;
+      font-weight: 800;
+      margin-top: 8px;
+      letter-spacing: 1px;
+      color: #459254;
+    }
+    .card:hover {
+      background: #fffbeab8;
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 6px 30px 0 #51a85427;
+      z-index: 2;
+    }
+    .mini-insights-grid {
+      margin-top: 44px;
+      display: flex;
+      gap: 30px;
+      justify-content: space-between;
+      align-items: stretch;
+      width: 95%;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .mini-insight {
+      flex:1;
+      background: #c8fee6;
+      border-radius: 13px;
+      box-shadow: 0 2px 12px #8eeec97e;
+      padding: 22px 20px 17px 17px;
+      margin: 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 1rem;
+    }
+    .mini-insight-icon {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 3px 9px #4b944e28;
+      color: #51ab8f;
+      font-size: 1.22rem;
+    }
+    .mini-insight-desc {
+      flex:1;
+      color: #256442;
+      font-weight: 600;
+      opacity:0.92;
+    }
+    @keyframes floatIn {
+      from {opacity: 0; transform: translateY(40px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes badge-pop {
+      0% { transform: scale(0.6); opacity: 0;}
+      100% { transform: scale(1); opacity: .95;}
+    }
+    @media (max-width: 900px) {
+      .dashboard-cards,
+      .mini-insights-grid { grid-template-columns:1fr; flex-direction:column; gap:18px;}
+      .main-content { padding: 22px 2vw;}
+      .sidebar { padding: 20px 10px 12px;}
+    }
+    @media (max-width:580px) {
+      body { flex-direction: column;}
+      .sidebar {
+        width: 100%;
+        border-radius: var(--radius) var(--radius) 0 0;
+        border-right: none;
+        border-bottom: 2px solid var(--glass-border);
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding: 10px 2vw 10px 2vw;
+      }
+      .sidebar h2 { display: none;}
+      .main-content { border-radius: 0 0 var(--radius) var(--radius);}
+      .dashboard-hero {padding:15px 10px;flex-direction:column;gap:8px;}
+      .mini-insights-grid{flex-direction:column;gap:18px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-accent"></div>
+  <div class="bg-accent2"></div>
+  <aside class="sidebar vendor">
+    <h2>Vendor Dashboard</h2>
+    <nav>
+      <a href="./vendor-myprofile.html">Profile</a>
+      <a href="./vendor-order.html">Orders</a>
+      <a href="./vendor-products.html">Products</a>
+      <a href="./landing-page.html">Logout</a>
+    </nav>
+  </aside>
+  <main class="main-content vendor">
+    <!-- Hero/Stat Banner with Shopping Cart SVG -->
+    <div class="dashboard-hero">
+      <svg width="65" height="65" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="26" cy="26" r="24" stroke="#61c48f" stroke-width="2" fill="#e5faec" />
+        <g>
+          <rect x="13" y="16" width="28" height="15" rx="4" fill="#61c48f" fill-opacity="0.16"/>
+          <path d="M16 18h24l-3 12H19z" stroke="#49b97b" stroke-width="2" fill="none"/>
+          <circle cx="21" cy="34" r="2" fill="#49b97b"/>
+          <circle cx="33" cy="34" r="2" fill="#49b97b"/>
+          <path d="M18 22h10" stroke="#49b97b" stroke-width="1.5"/>
+        </g>
+      </svg>
+      <div class="dashboard-hero-content">
+        <h1>Welcome back, <span style="color:#53c175;">Vendor</span></h1>
+        <p>Your dashboard gives you instant access to today’s performance and business insights at a glance.</p>
+      </div>
+    </div>
+
+    <!-- SVG Decorative Wave -->
+    <svg class="decorative-wave" viewBox="0 0 1440 45" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#e9f8f1" fill-opacity="0.75" d="M0 45V0c122 16.49 392 48 720 31.5C1048 15 1318 5 1440 27v18H0z"/></svg>
+
+    <div class="dashboard-cards">
+      <div class="card" tabindex="0">
+        Total Orders
+        <span class="card-number">25</span>
+        <span class="badge">+8%</span>
+      </div>
+      <div class="card" tabindex="0">
+        Pending Shipments
+        <span class="card-number">8</span>
+        <span class="badge">-2</span>
+      </div>
+      <div class="card" tabindex="0">
+        Total Spent
+        <span class="card-number">$4,500</span>
+        <span class="badge">↑$250</span>
+      </div>
+    </div>
+
+    <!-- Mini Insights or Quick Links Section -->
+    <div class="mini-insights-grid">
+      <div class="mini-insight">
+        <div class="mini-insight-icon">
+          <svg viewBox="0 0 28 28" fill="none" width="24" height="24"><circle cx="14" cy="14" r="12" fill="#61c48f" opacity="0.16"/><path d="M14 8v6l4 2" stroke="#39a06e" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </div>
+        <div class="mini-insight-desc">
+          Last order placed: <span style="color:#39a06e;font-weight:bold;">Yesterday</span>
+        </div>
+      </div>
+      <div class="mini-insight">
+        <div class="mini-insight-icon" style="background:#ffeccc;">
+          <svg width="24" height="24" fill="none" viewBox="0 0 28 28"><circle cx="14" cy="14" r="12" fill="#ffc96c" opacity="0.13"/><path d="M9 14l3 3 6-6" stroke="#f6ad44" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="mini-insight-desc">
+          Fulfillment rate: <span style="color:#b88603;font-weight:bold;">96%</span>
+        </div>
+      </div>
+      <div class="mini-insight">
+        <div class="mini-insight-icon" style="background:#ffecf3;">
+          <svg width="24" height="24" fill="none" viewBox="0 0 28 28"><circle cx="14" cy="14" r="12" fill="#fa91bd" opacity="0.13"/><path d="M11 19a7 7 0 100-14 7 7 0 000 14zm7.707-3.293a1 1 0 00-1.414 0l-2 2a1 1 0 000 1.414l5 5a1 1 0 001.414 0l2-2a1 1 0 000-1.414l-5-5z" stroke="#fa91bd" stroke-width="1.5"/></svg>
+        </div>
+        <div class="mini-insight-desc">
+          Avg. delivery time: <span style="color:#c43277;font-weight:bold;">28m</span>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
+

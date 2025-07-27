@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ThelaXpress Bidding Page</title>
+  <style>
+    :root {
+      --vendor-main: #f7a400;
+      --vendor-accent: #f57c00;
+      --vendor-gradient: linear-gradient(120deg, #ffb74d 0%, #ff7043 100%);
+      --vendor-sidebar-gradient: linear-gradient(140deg, #ff7043 0%, #f57c00 55%, #ffb74d 110%);
+      --vendor-card: rgba(255, 152, 0, 0.10);
+      --glass-bg: rgba(255, 255, 255, 0.8);
+      --glass-border: rgba(255, 255, 255, 0.23);
+      --badge-blue: #6fb4f7;
+      --badge-pink: #fa91bd;
+      --badge-orange: #ff7043;
+      --radius: 20px;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      background: var(--vendor-gradient);
+      align-items: stretch;
+      overflow-x: hidden;
+    }
+
+    .sidebar {
+      min-width: 220px;
+      max-width: 250px;
+      background: var(--vendor-sidebar-gradient);
+      backdrop-filter: blur(15px);
+      border-right: 2px solid var(--glass-border);
+      padding: 36px 24px 24px;
+      border-radius: var(--radius) 0 0 var(--radius);
+      box-shadow: 0 8px 36px 0 rgba(245, 124, 0, 0.14);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      z-index: 2;
+      position: relative;
+    }
+
+    .sidebar h2 {
+      font-weight: 800;
+      font-size: 1.55rem;
+      margin-bottom: 36px;
+      letter-spacing: 1px;
+      color: #fff;
+      text-shadow: 0 4px 16px #ff704355;
+    }
+
+    .sidebar nav a {
+      display: block;
+      width: 100%;
+      padding: 12px 18px;
+      margin-bottom: 14px;
+      border-radius: 15px;
+      color: #fff;
+      font-weight: 500;
+      font-size: 1.06rem;
+      background: rgba(255, 255, 255, 0.10);
+      text-decoration: none;
+      transition: background 0.22s, transform 0.15s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 14px 0 rgba(106, 180, 247, 0.06);
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a:focus {
+      background: #ffb74d;
+      color: #2e5132;
+      transform: scale(1.04) translateX(5px);
+      font-weight: 600;
+    }
+
+    .main-content {
+      flex: 1 1 0%;
+      background: var(--glass-bg);
+      padding: 36px 44px 26px 44px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      box-shadow: 0 5px 29px 0 rgba(245, 124, 0, 0.09);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      z-index: 1;
+      position: relative;
+    }
+
+    /* Header section added */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #f57c00;
+      margin: 0;
+    }
+
+    /* Cancel button styling from edit profile */
+    .cancel-btn {
+      background: #e5e7eb;
+      color: #ea580c;
+      padding: 8px 16px;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      transition: background-color 0.15s ease-in-out;
+      text-decoration: none;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cancel-btn:hover {
+      background: #d1d5db;
+    }
+
+    .cancel-btn a {
+      color: #ea580c;
+      text-decoration: none;
+    }
+
+    .bidding-container {
+      width: 100%;
+      max-width: 1200px;
+      background: var(--glass-bg);
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .bidding-container h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #f57c00;
+      margin-bottom: 20px;
+    }
+
+    .product-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .product-card {
+      background: var(--glass-bg);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+      width: 250px;
+      transition: transform 0.2s ease-in-out;
+      text-align: center;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .product-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 10px 0;
+      color: #ff7043;
+    }
+
+    .product-card .price {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #f57c00;
+    }
+
+    .place-bid-button {
+      background-color: #ff7043;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+    }
+
+    .place-bid-button:hover {
+      background-color: #f57c00;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sidebar">
+    <h2>ThelaXpress Dashboard</h2>
+    <nav>
+      <a href="./supplier-myprofile.html">Profile</a>
+      <a href="#">Orders</a>
+      <a href="#">Products</a>
+      <a href="./supplier-bid.html">Bidding</a>
+      <a href="./landing-page.html">Logout</a>
+    </nav>
+  </div>
+
+  <div class="main-content">
+    <!-- Header with cancel button -->
+    <header class="header">
+      <h1>Bidding Dashboard</h1>
+      <button class="cancel-btn">
+        <a href="./supplier-dashboard.html">Back to Dashboard</a>
+      </button>
+    </header>
+
+    <div class="bidding-container">
+      <h2>Current Bids for Products</h2>
+
+      <div class="product-row" id="productRow">
+        <!-- Product cards will be dynamically inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const bids = {
+      tomato: {
+        target: 100,
+        image: 'https://via.placeholder.com/250x250?text=Tomato',
+        bids: [
+          { price: 35, quantity: 60 },
+          { price: 32, quantity: 40 }
+        ]
+      },
+      potato: {
+        target: 50,
+        image: 'https://via.placeholder.com/250x250?text=Potato',
+        bids: [
+          { price: 30, quantity: 30 },
+          { price: 28, quantity: 20 }
+        ]
+      },
+      onion: {
+        target: 80,
+        image: 'https://via.placeholder.com/250x250?text=Onion',
+        bids: [
+          { price: 25, quantity: 50 },
+          { price: 20, quantity: 30 }
+        ]
+      }
+    };
+
+    function placeBid(product) {
+      // Redirect to the new placeBidPage
+      window.location.href = 'placeBidPage.html?product=' + product;
+    }
+
+    function initializeProducts() {
+      const productRow = document.getElementById('productRow');
+      let html = '';
+
+      for (const product in bids) {
+        const productData = bids[product];
+        html += `<div class="product-card">
+          <img src="${productData.image}" alt="${product}" />
+          <h3>${product.charAt(0).toUpperCase() + product.slice(1)}</h3>
+          <p class="price">Current Bid: ₹${productData.bids[0].price} per kg</p>
+          <button class="place-bid-button" onclick="placeBid('${product}')">Place Bid</button>
+        </div>`;
+      }
+      productRow.innerHTML = html;
+    }
+
+    window.onload = initializeProducts;
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edit Profile • ThelaXpress (Supplier)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --supplier-main: #f7a400;
+      --supplier-accent: #f57c00;
+      --supplier-gradient: linear-gradient(120deg, #ffb74d 0%, #ff7043 100%);
+      --supplier-sidebar-gradient: linear-gradient(140deg, #ff7043 0%, #f57c00 55%, #ffb74d 110%);
+      --glass-bg: rgba(255,255,255,0.7);
+      --glass-border: rgba(255,255,255,0.23);
+      --radius: 22px;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      background: var(--supplier-gradient);
+      align-items: stretch;
+      transition: background 0.6s;
+      overflow-x: hidden;
+      color: #bf6612;
+    }
+    /* Sidebar */
+    .sidebar-supplier {
+      min-width: 220px;
+      max-width: 250px;
+      background: var(--supplier-sidebar-gradient);
+      backdrop-filter: blur(15px);
+      border-right: 2px solid var(--glass-border);
+      padding: 36px 24px 24px;
+      border-radius: var(--radius) 0 0 var(--radius);
+      box-shadow: 0 8px 36px 0 rgba(245,124,0,0.14), 0 7px 22px rgba(255,233,134,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      z-index: 2;
+      position: relative;
+    }
+    .sidebar-supplier h2 {
+      font-weight: 800;
+      font-size: 1.45rem;
+      margin-bottom: 36px;
+      letter-spacing: 1px;
+      color: #fff;
+      text-shadow: 0 4px 16px #ff704355;
+    }
+    .sidebar-supplier nav {
+      width: 100%;
+    }
+    .sidebar-supplier nav a {
+      display: block;             /* Full width button */
+      width: 100%;                /* Full width */
+      padding: 10px 18px;
+      margin-bottom: 14px;
+      border-radius: 13px;
+      color: #fff;
+      font-weight: 500;
+      font-size: 1.06rem;
+      background: rgba(255,255,255,0.10);
+      text-decoration: none;
+      transition: background 0.22s, transform 0.15s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 14px 0 rgba(106,180,247,0.06);
+      cursor: pointer;
+    }
+    .sidebar-supplier nav a:hover,
+    .sidebar-supplier nav a:focus,
+    .sidebar-supplier nav a.active {
+      background: #ffb74d;
+      color: #3b2403;
+      transform: scale(1.04) translateX(5px);
+      font-weight: 600;
+      box-shadow: 0 4px 20px 0 rgba(255, 183, 77, 0.7);
+    }
+    @media (max-width:900px) {
+      .sidebar-supplier {
+        min-width: 160px;
+        max-width: 200px;
+        padding: 20px 10px 12px;
+      }
+    }
+    @media (max-width:580px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar-supplier {
+        width: 100%;
+        border-radius: var(--radius) var(--radius) 0 0;
+        border-right: none;
+        border-bottom: 2px solid var(--glass-border);
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding: 10px 2vw 10px 2vw;
+      }
+      .sidebar-supplier h2 {
+        display: none;
+      }
+      .sidebar-supplier nav a {
+        margin-bottom: 0;
+      }
+    }
+    /* Main content */
+    .profile-main-content {
+      flex: 1;
+      padding: 2.5rem;
+      background: rgba(255,255,255,0.6);
+      box-shadow: 0 4px 30px -4px #f7a4001c;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      min-width: 0;
+      backdrop-filter: blur(12px);
+      color: #7c4400;
+    }
+    @media (max-width:900px) {
+      .profile-main-content {
+        padding: 1rem;
+      }
+    }
+    @media (max-width:580px) {
+      .profile-main-content {
+        border-radius: 0 0 var(--radius) var(--radius);
+      }
+    }
+    /* Float animation */
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+    .float {
+      animation: float 3s ease-in-out infinite;
+    }
+    label[for='avatar'] {
+      cursor: pointer;
+      user-select: none;
+    }
+  </style>
+</head>
+<body class="text-orange-900 font-sans min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="sidebar-supplier" role="navigation" aria-label="Supplier Profile Navigation">
+    <h2>Dealer Profile</h2>
+    <nav>
+      <a href="./supplier-dashboard.html">Dashboard</a>
+      <a href="./supplier-myprofile.html">Profile</a>
+      <a href="./landing-page.html">Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="profile-main-content">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between mb-8">
+      <h1 class="text-3xl font-extrabold">Edit Profile</h1>
+      <button id="cancel-btn" class="bg-gray-200 hover:bg-gray-300 text-orange-800 px-4 py-2 rounded-lg shadow transition">
+        <a href="./supplier-myprofile.html" class="no-underline text-orange-800">Cancel</a>
+      </button>
+    </header>
+
+    <!-- Edit Profile Form -->
+    <form id="edit-profile-form" class="max-w-3xl mx-auto space-y-8 bg-white p-8 rounded-2xl shadow-md" novalidate>
+      <div class="flex items-center gap-6">
+        <div class="relative">
+          <img
+            id="avatar-preview"
+            src="https://via.placeholder.com/120?text=Dealer"
+            alt="Dealer avatar"
+            class="w-32 h-32 rounded-full object-cover shadow-lg float"
+          />
+          <label for="avatar" class="absolute bottom-0 right-0 bg-orange-600 hover:bg-orange-700 text-white p-2 rounded-full shadow-md cursor-pointer transition" title="Change Avatar">
+            ✎
+          </label>
+          <input type="file" id="avatar" name="avatar" accept="image/*" class="hidden" aria-label="Change Avatar" />
+        </div>
+        <div>
+          <h2 class="text-2xl font-semibold">DealerName</h2>
+          <p class="text-orange-800/80">Joined: March 12, 2024</p>
+        </div>
+      </div>
+
+      <!-- Form Fields -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="fullName" class="font-medium block mb-1">Full Name</label>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            required
+            class="w-full border border-orange-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            value="DealerName"
+          />
+        </div>
+        <div>
+          <label for="email" class="font-medium block mb-1">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full border border-orange-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            value="dealer@example.com"
+          />
+        </div>
+        <div>
+          <label for="phone" class="font-medium block mb-1">Phone</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            required
+            class="w-full border border-orange-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            value="+91 99874 56789"
+          />
+        </div>
+        <div>
+          <label for="company" class="font-medium block mb-1">Company Name</label>
+          <input
+            type="text"
+            id="company"
+            name="company"
+            required
+            class="w-full border border-orange-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            value="Fresh Raw Materials Ltd."
+          />
+        </div>
+        <div>
+          <label for="location" class="font-medium block mb-1">Location</label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            required
+            class="w-full border border-orange-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            value="Ahmedabad, India"
+          />
+        </div>
+        <div>
+          <label for="materials" class="font-medium block mb-1">Materials Provided</label>
+          <input
+            type="text"
+            id="materials"
+            name="materials"
+            class="w-full border border-orange-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            value="Vegetables, Grains, Spices"
+          />
+        </div>
+      </div>
+      <div class="text-right">
+        <button
+          type="submit"
+          class="bg-orange-700 hover:bg-orange-800 text-white px-6 py-2 rounded-lg shadow transition"
+        >
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    // Avatar preview functionality with validation
+    document.getElementById('avatar').addEventListener('change', function (e) {
+      const [file] = e.target.files;
+      if (file) {
+        if (!file.type.startsWith('image/')) {
+          alert('Please select a valid image file.');
+          return;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+          alert('Image size should be less than 5MB.');
+          return;
+        }
+        document.getElementById('avatar-preview').src = URL.createObjectURL(file);
+      }
+    });
+
+    // Cancel button: no special JS needed since it's a link inside button, but keep for clarity
+    document.getElementById('cancel-btn').addEventListener('click', function () {
+      // Let the link <a> handle navigation by default
+    });
+
+    // Form submission stub
+    document.getElementById('edit-profile-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      // TODO: Implement your API integration here
+      alert('Profile updated successfully.');
+    });
+  </script>
+</body>
+</html>

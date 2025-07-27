@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Profile • ThelaXpress (Supplier)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --supplier-main: #f7a400;
+      --supplier-accent: #f57c00;
+      --supplier-gradient: linear-gradient(120deg, #ffb74d 0%, #ff7043 100%);
+      --supplier-sidebar-gradient: linear-gradient(140deg, #ff7043 0%, #f57c00 55%, #ffb74d 110%);
+      --supplier-card: rgba(255, 152, 0, 0.10);
+      --glass-bg: rgba(255,255,255,0.7);
+      --glass-border: rgba(255,255,255,0.23);
+      --radius: 22px;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      background: var(--supplier-gradient);
+      align-items: stretch;
+      transition: background 0.6s;
+      overflow-x: hidden;
+    }
+    /* Supplier Dashboard-style Sidebar */
+    .sidebar-supplier {
+      min-width: 220px;
+      max-width: 250px;
+      background: var(--supplier-sidebar-gradient);
+      backdrop-filter: blur(15px);
+      border-right: 2px solid var(--glass-border);
+      padding: 36px 24px 24px;
+      border-radius: var(--radius) 0 0 var(--radius);
+      box-shadow: 0 8px 36px 0 rgba(245,124,0,0.14), 0 7px 22px rgba(255,233,134,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      z-index: 2;
+      position: relative;
+    }
+    .sidebar-supplier h2 {
+      font-weight: 800;
+      font-size: 1.45rem;
+      margin-bottom: 36px;
+      letter-spacing: 1px;
+      color: #fff;
+      text-shadow: 0 4px 16px #ff704355;
+    }
+    .sidebar-supplier nav {
+      width: 100%;
+    }
+    .sidebar-supplier nav a {
+      display: block;
+      width: 100%;
+      padding: 10px 18px;
+      margin-bottom: 14px;
+      border-radius: 13px;
+      color: #fff;
+      font-weight: 500;
+      font-size: 1.06rem;
+      background: rgba(255,255,255,0.10);
+      text-decoration: none;
+      transition: background 0.22s, transform 0.15s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 14px 0 rgba(106,180,247,0.06);
+    }
+    .sidebar-supplier nav a:hover,
+    .sidebar-supplier nav a:focus,
+    .sidebar-supplier nav a.active {
+      background: #ffb74d;
+      color: #3b2403;
+      transform: scale(1.04) translateX(5px);
+      font-weight: 600;
+    }
+
+    /* Responsive for sidebar and main content */
+    @media (max-width:900px) {
+      .sidebar-supplier {
+        min-width:160px;
+        max-width:200px;
+        padding: 20px 10px 12px;
+      }
+    }
+    @media (max-width:580px) {
+      body { flex-direction: column;}
+      .sidebar-supplier {
+        width: 100%;
+        border-radius: var(--radius) var(--radius) 0 0;
+        border-right: none;
+        border-bottom: 2px solid var(--glass-border);
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding: 10px 2vw 10px 2vw;
+      }
+      .sidebar-supplier h2 { display: none;}
+      .sidebar-supplier nav a {
+        margin-bottom: 0;
+      }
+    }
+    .profile-main-content {
+      flex: 1;
+      padding: 2.5rem;
+      background: rgba(255,255,255,0.6);
+      box-shadow: 0 4px 30px -4px #f7a4001c;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      min-width: 0;
+      backdrop-filter: blur(12px);
+    }
+    @media (max-width:900px) {
+      .profile-main-content { padding: 1rem;}
+    }
+    @media (max-width:580px) {
+      .profile-main-content { border-radius: 0 0 var(--radius) var(--radius);}
+    }
+    /* Float avatar animation */
+    @keyframes float { 0%,100%{transform: translateY(0)}50%{transform: translateY(-5px)} }
+    .float { animation: float 3s ease-in-out infinite; }
+
+    .glass {
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="text-orange-900 font-sans min-h-screen flex">
+
+  <!-- Sidebar (matching supplier dashboard theme) -->
+  <aside class="sidebar-supplier">
+    <h2>Supplier Profile</h2>
+    <nav>
+      <a href="./supplier-dashboard.html">Dashboard</a>
+      <a href="./supplier-myprofile.html" class="active">Profile</a>
+      <a href="./landing-page.html">Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="profile-main-content">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between mb-8">
+      <h1 class="text-3xl font-extrabold">My Profile</h1>
+      <button id="edit-profile-btn" class="bg-orange-700 hover:bg-orange-800 text-white px-4 py-2 rounded-lg shadow transition">
+        <a href="./supplier-editprofile.html">Edit Profile</a>
+      </button>
+    </header>
+
+    <!-- Profile Card -->
+    <section class="max-w-3xl mx-auto bg-white rounded-2xl shadow-md p-8 flex flex-col md:flex-row items-center gap-8">
+      <div class="relative">
+        <img id="avatar-preview" src="https://via.placeholder.com/120?text=Supplier" alt="Supplier avatar"
+             class="w-32 h-32 rounded-full object-cover shadow-lg float" />
+        <!-- Functional avatar upload button -->
+        <label for="avatar" class="absolute bottom-0 right-0 bg-orange-600 hover:bg-orange-700 text-white p-2 rounded-full shadow-md cursor-pointer transition" title="Change Avatar">
+          ✎
+        </label>
+        <input type="file" id="avatar" name="avatar" accept="image/*" class="hidden" />
+      </div>
+      <div class="flex-1 space-y-3">
+        <h2 class="text-2xl font-semibold">SupplierName</h2>
+        <p class="text-orange-800">supplier@example.com</p>
+        <p class="text-orange-800/80">Joined: March 12, 2024</p>
+      </div>
+    </section>
+
+    <!-- Profile Details -->
+    <section class="mt-12 max-w-3xl mx-auto space-y-6">
+
+      <!-- Business Information for Supplier -->
+      <div class="glass p-6 rounded-2xl shadow-sm">
+        <h3 class="font-semibold mb-2 text-orange-900">Business Information</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="font-medium block mb-1">Company Name</label>
+            <p class="text-orange-900">Fresh Raw Materials Ltd.</p>
+          </div>
+          <div>
+            <label class="font-medium block mb-1">Location</label>
+            <p class="text-orange-900">Ahmedabad, India</p>
+          </div>
+          <div>
+            <label class="font-medium block mb-1">Phone</label>
+            <p class="text-orange-900">+91 99874 56789</p>
+          </div>
+          <div>
+            <label class="font-medium block mb-1">Materials Provided</label>
+            <p class="text-orange-900">Vegetables, Grains, Spices</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    // Avatar preview functionality
+    document.getElementById('avatar').addEventListener('change', function(e) {
+      const [file] = e.target.files;
+      if (file) {
+        // Validate file type
+        if (!file.type.startsWith('image/')) {
+          alert('Please select a valid image file.');
+          return;
+        }
+        // Validate file size (max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+          alert('Image size should be less than 5MB.');
+          return;
+        }
+        document.getElementById('avatar-preview').src = URL.createObjectURL(file);
+      }
+    });
+  </script>
+
+</body>
+</html>

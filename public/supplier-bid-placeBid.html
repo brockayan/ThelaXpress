@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Place Bid for Product</title>
+  <style>
+    :root {
+      --vendor-main: #f7a400;
+      --vendor-accent: #f57c00;
+      --vendor-gradient: linear-gradient(120deg, #ffb74d 0%, #ff7043 100%);
+      --vendor-sidebar-gradient: linear-gradient(140deg, #ff7043 0%, #f57c00 55%, #ffb74d 110%);
+      --vendor-card: rgba(255, 152, 0, 0.10);
+      --glass-bg: rgba(255, 255, 255, 0.8);
+      --glass-border: rgba(255, 255, 255, 0.23);
+      --badge-blue: #6fb4f7;
+      --badge-pink: #fa91bd;
+      --badge-orange: #ff7043;
+      --radius: 20px;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      background: var(--vendor-gradient);
+      align-items: stretch;
+      overflow-x: hidden;
+    }
+
+    .sidebar {
+      min-width: 220px;
+      max-width: 250px;
+      background: var(--vendor-sidebar-gradient);
+      backdrop-filter: blur(15px);
+      border-right: 2px solid var(--glass-border);
+      padding: 36px 24px 24px;
+      border-radius: var(--radius) 0 0 var(--radius);
+      box-shadow: 0 8px 36px 0 rgba(245, 124, 0, 0.14);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      z-index: 2;
+      position: relative;
+    }
+
+    .sidebar h2 {
+      font-weight: 800;
+      font-size: 1.55rem;
+      margin-bottom: 36px;
+      letter-spacing: 1px;
+      color: #fff;
+      text-shadow: 0 4px 16px #ff704355;
+    }
+
+    .sidebar nav a {
+      display: block;
+      width: 100%;
+      padding: 12px 18px;
+      margin-bottom: 14px;
+      border-radius: 15px;
+      color: #fff;
+      font-weight: 500;
+      font-size: 1.06rem;
+      background: rgba(255, 255, 255, 0.10);
+      text-decoration: none;
+      transition: background 0.22s, transform 0.15s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 14px 0 rgba(106, 180, 247, 0.06);
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a:focus {
+      background: #ffb74d;
+      color: #2e5132;
+      transform: scale(1.04) translateX(5px);
+      font-weight: 600;
+    }
+
+    .main-content {
+      flex: 1 1 0%;
+      background: var(--glass-bg);
+      padding: 36px 44px 26px 44px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      box-shadow: 0 5px 29px 0 rgba(245, 124, 0, 0.09);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      z-index: 1;
+      position: relative;
+    }
+
+    .place-bid-container {
+      width: 100%;
+      max-width: 900px;
+      background: var(--glass-bg);
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .place-bid-container h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #f57c00;
+      margin-bottom: 20px;
+    }
+
+    .product-details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .product-details img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    .product-details p {
+      font-size: 1.2rem;
+      color: #ff7043;
+    }
+
+    .place-bid-form input,
+    .place-bid-form button {
+      padding: 10px;
+      font-size: 1.1rem;
+      margin: 10px 0;
+      width: 250px;
+      border-radius: 10px;
+      border: 2px solid #f57c00;
+    }
+
+    .place-bid-form button {
+      background-color: #ff7043;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .place-bid-form button:hover {
+      background-color: #f57c00;
+    }
+
+    .current-bids {
+      margin-top: 30px;
+      font-size: 1.1rem;
+      color: #ff7043;
+    }
+
+    .price-section {
+      margin: 20px 0;
+      font-size: 1.2rem;
+      color: #ff7043;
+      font-weight: 600;
+    }
+
+    .place-bid-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    /* My Current Bid Section */
+    .my-current-bid {
+      margin-top: 30px;
+      font-size: 1.2rem;
+      color: #f57c00;
+      font-weight: 600;
+    }
+
+    .my-current-bid p {
+      font-size: 1.1rem;
+      color: #ff7043;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sidebar">
+    <h2>ThelaXpress Dashboard</h2>
+    <nav>
+
+      <a href="./supplier-order.html">Orders</a>
+
+      <a href="./supplier-bid.html">Bidding</a>
+      <a href="#">Logout</a>
+    </nav>
+  </div>
+
+  <div class="main-content">
+    <div class="place-bid-container" id="placeBidContainer">
+      <h2>Place Bid for Product</h2>
+
+      <!-- Product details will be injected here -->
+      <div class="product-details" id="productDetails">
+        <img src="" alt="Product Image" id="productImage" />
+        <p id="productInfo"></p>
+      </div>
+
+      <!-- Starting price and countdown -->
+      <div class="price-section" id="priceSection">
+        <p>Bidding starts from: ₹35 per kg</p>
+        <p id="currentPrice">Current Price: ₹35 per kg</p>
+      </div>
+
+      <!-- Form for placing a bid -->
+      <div class="place-bid-form">
+        <label for="bidPrice">Price per kg</label>
+        <input type="number" id="bidPrice" placeholder="Bid Price per kg" />
+
+        <label for="bidQuantity">Quantity (kg)</label>
+        <input type="number" id="bidQuantity" placeholder="Bid Quantity (min 20kg)" value="20" min="20" />
+
+        <button id="submitBidButton">Place Bid</button>
+      </div>
+
+      <!-- Current Bids display -->
+      <div class="current-bids" id="currentBids">
+        <!-- Current bids will be displayed here -->
+      </div>
+
+      <!-- My Current Bid Section -->
+      <div class="my-current-bid" id="myCurrentBid">
+        <p>No bids placed yet.</p> <!-- Will be updated once a bid is placed -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const product = urlParams.get('product');
+
+    const bids = {
+      tomato: {
+        target: 100,
+        image: 'https://via.placeholder.com/250x250?text=Tomato',
+        bids: [
+          { price: 35, quantity: 60 },
+          { price: 32, quantity: 40 }
+        ]
+      },
+      potato: {
+        target: 50,
+        image: 'https://via.placeholder.com/250x250?text=Potato',
+        bids: [
+          { price: 30, quantity: 30 },
+          { price: 28, quantity: 20 }
+        ]
+      },
+      onion: {
+        target: 80,
+        image: 'https://via.placeholder.com/250x250?text=Onion',
+        bids: [
+          { price: 25, quantity: 50 },
+          { price: 20, quantity: 30 }
+        ]
+      }
+    };
+
+    let myBid = null; // Variable to store user's bid
+
+    function updateProductDetails() {
+      const productData = bids[product];
+      document.getElementById('productImage').src = productData.image;
+      document.getElementById('productInfo').textContent = `Target: ${productData.target} kg, Current Bid: ₹${productData.bids[0].price} per kg`;
+
+      let currentBidsHtml = '<h3>Current Bids</h3>';
+      productData.bids.sort((a, b) => a.price - b.price);  // Sort bids by price (lowest first)
+      productData.bids.forEach(bid => {
+        currentBidsHtml += `<p>₹${bid.price}/kg for ${bid.quantity}kg</p>`;
+      });
+      document.getElementById('currentBids').innerHTML = currentBidsHtml;
+
+      // Update the current price based on the highest bid
+      const highestBid = productData.bids[0].price;
+      document.getElementById('currentPrice').textContent = `Current Price: ₹${highestBid} per kg`;
+    }
+
+    function handlePlaceBid() {
+      const bidPrice = parseInt(document.getElementById('bidPrice').value);
+      const bidQuantity = parseInt(document.getElementById('bidQuantity').value);
+
+      if (isNaN(bidPrice) || isNaN(bidQuantity) || bidQuantity < 20 || bidPrice <= 0) {
+        alert('Please enter a valid price and a minimum of 20kg for the quantity.');
+        return;
+      }
+
+      const productData = bids[product];
+      if (productData.target <= 0) {
+        alert('Target quantity already reached!');
+        return;
+      }
+
+      // Add new bid
+      productData.bids.push({ price: bidPrice, quantity: bidQuantity });
+      productData.bids.sort((a, b) => a.price - b.price);  // Sort bids by price (lowest first)
+
+      productData.target -= bidQuantity;
+
+      myBid = { price: bidPrice, quantity: bidQuantity }; // Store the user's bid
+
+      updateProductDetails();
+      updateMyBid();
+    }
+
+    // Update the "My Current Bid" section
+    function updateMyBid() {
+      const myBidSection = document.getElementById('myCurrentBid');
+      if (myBid) {
+        myBidSection.innerHTML = `<p>Your Bid: ₹${myBid.price}/kg for ${myBid.quantity}kg</p>`;
+      } else {
+        myBidSection.innerHTML = `<p>No bids placed yet.</p>`;
+      }
+    }
+
+    document.getElementById('submitBidButton').addEventListener('click', handlePlaceBid);
+
+    window.onload = updateProductDetails;
+  </script>
+</body>
+
+</html>

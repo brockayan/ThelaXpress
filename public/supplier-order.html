@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Supplier Orders • ThelaXpress</title>
+  <style>
+    :root {
+      --vendor-main: #f7a400;
+      --vendor-accent: #f57c00;
+      --vendor-gradient: linear-gradient(120deg, #ffb74d 0%, #ff7043 100%);
+      --vendor-sidebar-gradient: linear-gradient(140deg, #ff7043 0%, #f57c00 55%, #ffb74d 110%);
+      --vendor-card: rgba(255, 152, 0, 0.10);
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.23);
+      --badge-pending-bg: #fff3cd;
+      --badge-pending-color: #856404;
+      --badge-processing-bg: #d1ecf1;
+      --badge-processing-color: #0c5460;
+      --badge-shipped-bg: #cce5ff;
+      --badge-shipped-color: #004085;
+      --badge-delivered-bg: #d4edda;
+      --badge-delivered-color: #155724;
+      --badge-cancelled-bg: #f8d7da;
+      --badge-cancelled-color: #721c24;
+      --radius: 22px;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      background: var(--vendor-gradient);
+      align-items: stretch;
+      transition: background 0.6s;
+      overflow-x: hidden;
+      color: #bf6612;
+    }
+    .sidebar {
+      min-width: 220px;
+      max-width: 250px;
+      background: var(--vendor-sidebar-gradient);
+      backdrop-filter: blur(15px);
+      border-right: 2px solid var(--glass-border);
+      padding: 24px 18px 16px;
+      border-radius: var(--radius) 0 0 var(--radius);
+      box-shadow: 0 8px 36px 0 rgba(245,124,0,0.14), 0 7px 22px rgba(255,233,134,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      z-index: 2;
+      position: relative;
+    }
+    .sidebar h2 {
+      font-weight: 800;
+      font-size: 1.37rem;
+      margin-bottom: 26px;
+      letter-spacing: 1px;
+      color: #fff;
+      text-shadow: 0 4px 16px #ff704355;
+    }
+    .sidebar nav {
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* Ensure vertical stacking */
+  gap: 10px;              /* Optional, spacing between buttons */
+}
+
+.sidebar nav a {
+  display: block;       /* Make links block-level for full-width stacking */
+  width: auto;          /* Width adapts to content */
+  max-width: 140px;     /* Optional max width to keep buttons compact */
+  padding: 6px 14px;    /* Compact padding */
+  border-radius: 11px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1rem;
+  background: rgba(255,255,255,0.10);
+  text-decoration: none;
+  transition: background 0.22s, transform 0.15s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 12px 0 rgba(106,180,247,0.06);
+  cursor: pointer;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a:focus,
+.sidebar nav a.active {
+  background: #ffb74d;
+  color: #2e5132;
+  transform: scale(1.035) translateX(4px);
+  font-weight: 600;
+  box-shadow: 0 3px 16px 0 rgba(255,183,77,0.55);
+}
+
+.sidebar nav a:hover,
+.sidebar nav a:focus,
+.sidebar nav a.active {
+  background: #ffb74d;
+  color: #2e5132;
+  transform: scale(1.035) translateX(4px);
+  font-weight: 600;
+  box-shadow: 0 3px 16px 0 rgba(255,183,77,0.55);
+}
+
+    .sidebar nav a:hover,
+    .sidebar nav a:focus,
+    .sidebar nav a.active {
+      background: #ffb74d;
+      color: #2e5132;
+      transform: scale(1.035) translateX(4px);
+      font-weight: 600;
+      box-shadow: 0 3px 16px 0 rgba(255,183,77,0.55);
+    }
+    /* Rest of styles remain unchanged... */
+    .main-content {
+      flex: 1 1 0%;
+      background: var(--glass-bg);
+      padding: 30px 30px 20px 30px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      box-shadow: 0 5px 29px 0 rgba(245,124,0,0.09);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      z-index: 1;
+      position: relative;
+      color: #7c4400;
+    }
+    @media (max-width:900px) {
+      .sidebar {
+        min-width: 150px;
+        max-width: 200px;
+        padding: 14px 7px 8px;
+      }
+      .main-content {
+        padding: 10px;
+      }
+    }
+    @media (max-width:580px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        border-radius: var(--radius) var(--radius) 0 0;
+        border-right: none;
+        border-bottom: 2px solid var(--glass-border);
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding: 7px 1vw 7px 1vw;
+      }
+      .sidebar h2 {
+        display: none;
+      }
+      .sidebar nav a {
+        margin-bottom: 0;
+      }
+    }
+    /* ...Table, badges, buttons etc as before... */
+    /* Table and rest are unchanged and omitted for brevity */
+    /* (Copy from your previous working file) */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--vendor-accent);
+      margin: 0;
+    }
+    .search-filter {
+      display: flex;
+      gap: 12px;
+    }
+    input[type="text"], select {
+      border: 1.5px solid var(--vendor-accent);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 1rem;
+      outline-offset: 2px;
+      transition: box-shadow 0.3s ease;
+    }
+    input[type="text"]:focus, select:focus {
+      box-shadow: 0 0 5px var(--vendor-accent);
+      border-color: var(--vendor-accent);
+    }
+    table { width: 100%; border-collapse: separate; border-spacing: 0 12px; background: white; border-radius: var(--radius); box-shadow: 0 6px 15px rgb(247 124 0 / 0.15); overflow: hidden; }
+    thead tr { background: var(--vendor-accent); color: white; font-weight: 700; font-size: 1.1rem; border-radius: var(--radius);}
+    thead th { padding: 12px 16px; text-align: left; user-select: none;}
+    tbody tr { cursor: pointer; transition: background-color 0.2s ease;}
+    tbody tr:hover { background-color: var(--vendor-card);}
+    tbody td { padding: 14px 16px; vertical-align: middle; font-size: 1rem; color: #7c4400;}
+    .status-badge { display: inline-block; font-size: 0.8rem; font-weight: 700; padding: 5px 12px; border-radius: 50px; user-select: none; transition: background-color 0.25s ease, color 0.25s ease; }
+    .status-pending { background-color: var(--badge-pending-bg); color: var(--badge-pending-color);}
+    .status-processing { background-color: var(--badge-processing-bg); color: var(--badge-processing-color);}
+    .status-shipped { background-color: var(--badge-shipped-bg); color: var(--badge-shipped-color);}
+    .status-delivered { background-color: var(--badge-delivered-bg); color: var(--badge-delivered-color);}
+    .status-cancelled { background-color: var(--badge-cancelled-bg); color: var(--badge-cancelled-color);}
+    .btn-action { background-color: var(--vendor-accent); color: white; border: none; border-radius: 8px; padding: 8px 16px; font-weight: 600; font-size: 0.9rem; cursor: pointer; box-shadow: 0 3px 10px rgb(247 124 0 / 0.4); transition: background-color 0.3s ease;}
+    .btn-action:hover:not(:disabled) { background-color: #f57c00;}
+    .btn-action:disabled { background-color: #ccc; color: #999; cursor: not-allowed; box-shadow: none;}
+  </style>
+</head>
+
+<body>
+  <div class="sidebar" role="navigation" aria-label="Supplier Dashboard Navigation">
+    <h2>Supplier Dashboard</h2>
+    <nav>
+      <a href="./supplier-myprofile.html">Profile</a>
+      <a href="./supplier-orders.html" class="active" aria-current="page">Orders</a>
+      <a href="./supplier-products.html">Products</a>
+      <a href="./supplier-bid.html">Bid</a>
+      <a href="./landing-page.html">Logout</a>
+    </nav>
+  </div>
+
+  <main class="main-content" role="main">
+    <header>
+      <h1>My Orders</h1>
+      <div class="search-filter">
+        <input type="text" id="searchOrders" placeholder="Search orders…" aria-label="Search orders" />
+        <select id="filterStatus" aria-label="Filter orders by status">
+          <option value="">All Statuses</option>
+          <option value="pending">Pending</option>
+          <option value="processing">Processing</option>
+          <option value="shipped">Shipped</option>
+          <option value="delivered">Delivered</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
+    </header>
+    <section>
+      <table aria-describedby="ordersTableDesc" tabindex="0">
+        <caption id="ordersTableDesc" class="sr-only">List of your orders including date, items, amount, and status</caption>
+        <thead>
+          <tr>
+            <th scope="col">Order #</th>
+            <th scope="col">Date</th>
+            <th scope="col">Items</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody id="ordersBody">
+          <tr>
+            <td>SUP-1001</td>
+            <td>Jul 25, 2025</td>
+            <td>Tomatoes (15kg), Potatoes (10kg)</td>
+            <td>$1,800</td>
+            <td><span class="status-badge status-pending">Pending</span></td>
+            <td><button class="btn-action">Track</button></td>
+          </tr>
+          <tr>
+            <td>SUP-1002</td>
+            <td>Jul 22, 2025</td>
+            <td>Onions (20kg)</td>
+            <td>$900</td>
+            <td><span class="status-badge status-shipped">Shipped</span></td>
+            <td><button class="btn-action">Track</button></td>
+          </tr>
+          <tr>
+            <td>SUP-1003</td>
+            <td>Jul 18, 2025</td>
+            <td>Flour (50kg)</td>
+            <td>$3,400</td>
+            <td><span class="status-badge status-delivered">Delivered</span></td>
+            <td><button class="btn-action">Invoice</button></td>
+          </tr>
+          <tr>
+            <td>SUP-1004</td>
+            <td>Jul 15, 2025</td>
+            <td>Carrots (12kg)</td>
+            <td>$650</td>
+            <td><span class="status-badge status-cancelled">Cancelled</span></td>
+            <td><button class="btn-action" disabled>N/A</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <script>
+    // Optional: implement search and filter functionality below if needed to enhance UX.
+    const searchInput = document.getElementById('searchOrders');
+    const statusFilter = document.getElementById('filterStatus');
+    const ordersBody = document.getElementById('ordersBody');
+    function filterOrders() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const filterStatusValue = statusFilter.value;
+      for (const row of ordersBody.rows) {
+        const orderNum = row.cells[0].innerText.toLowerCase();
+        const date = row.cells[1].innerText.toLowerCase();
+        const items = row.cells[2].innerText.toLowerCase();
+        const amount = row.cells[3].innerText.toLowerCase();
+        const status = row.cells[4].innerText.toLowerCase();
+        const matchesSearch =
+          orderNum.includes(searchTerm) ||
+          date.includes(searchTerm) ||
+          items.includes(searchTerm) ||
+          amount.includes(searchTerm) ||
+          status.includes(searchTerm);
+        const matchesStatus =
+          filterStatusValue === '' || status === filterStatusValue;
+        row.style.display = matchesSearch && matchesStatus ? '' : 'none';
+      }
+    }
+    searchInput.addEventListener('input', filterOrders);
+    statusFilter.addEventListener('change', filterOrders);
+  </script>
+</body>
+</html>
